@@ -130,7 +130,7 @@ Cuando un visitante hace click en un ad de Meta del Pack Hombre, va directo acá
 
 ## 🤝 Soporte
 
-- WhatsApp: +593 98 464 1331
+- WhatsApp: +593 96 847 3255
 - Email: edwardsmurillo@hotmail.com
 - Generada con asistencia del agente Landing Dev & CRO Expert · Netwheels
 

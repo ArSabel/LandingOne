@@ -128,12 +128,9 @@ button { font-family: inherit; cursor: pointer; }
   font-weight: 700; letter-spacing: 2px; font-size: 11px;
 }
 .hdr__brand-icon {
-  width: 32px; height: 32px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, var(--gold-dark), var(--gold-soft));
-  display: flex; align-items: center; justify-content: center;
-  color: var(--bg); font-weight: 900; font-size: 14px;
-  font-family: "Times New Roman", serif;
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
 }
 .hdr__brand-text {
   display: flex; flex-direction: column;
@@ -992,7 +989,7 @@ src="https://www.facebook.com/tr?id=1424234839427455&ev=PageView&noscript=1"
 <header class="hdr">
   <div class="hdr__inner">
     <a class="hdr__brand" href="https://netwheelsgrowthpartnert.com/">
-      <div class="hdr__brand-icon">N</div>
+      <img class="hdr__brand-icon" src="assets/favicon.svg" alt="Logo" />
       <div class="hdr__brand-text">
         <strong>EL HOMBRE</strong>
         <small data-i18n="hdr_product_subtitle">QUE ELLA NO CAMBIA POR NADIE</small>

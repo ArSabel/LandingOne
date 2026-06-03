@@ -1379,10 +1379,11 @@ src="https://www.facebook.com/tr?id=1424234839427455&ev=PageView&noscript=1"
 // ═══════════════════════════════════════════════════════════
 
 // ── DATA ──
-const VARIANT_HP = "48763472347392";
-const HANDLE_HP = "pack-el-hombre-que-ella-desea";
-const SHOP_CART = "https://netwheelsgrowthpartnert.com/cart/";
-const SHOP = "https://netwheelsgrowthpartnert.com/products/";
+const SHOP_PRODUCTS = {
+  en: "https://e0n3bi-gi.myshopify.com/products/the-man-pack-complete-set?variant=48770092564736",
+  es: "https://e0n3bi-gi.myshopify.com/products/pack-el-hombre-que-ella-desea?variant=48769939931392",
+  pt: "https://e0n3bi-gi.myshopify.com/products/pack-o-homem-colecao-completa?variant=48775269449984"
+};
 const UTM = "?utm_source=landing_hp&utm_medium=organic&utm_campaign=pack_hombre&utm_content=";
 const SUPPORTED_LANGS = ['es', 'en', 'pt'];
 const DEFAULT_LANG = 'es';
@@ -1658,7 +1659,8 @@ function t(key) {
 }
 
 function buildCartUrl() {
-  return `${SHOP_CART}${VARIANT_HP}:1?discount=BIENVENIDA10${UTM.replace('?','&')}pack_hombre_landing`;
+  const baseUrl = SHOP_PRODUCTS[LANG] || SHOP_PRODUCTS[DEFAULT_LANG];
+  return `${baseUrl}&discount=BIENVENIDA10${UTM.replace('?','&')}pack_hombre_landing`;
 }
 
 function applyLanguage() {

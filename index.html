@@ -962,6 +962,16 @@ button { font-family: inherit; cursor: pointer; }
 .wa-fab svg { width: 26px; height: 26px; }
 @media (max-width: 768px) {
 }
+/* Policy Modal */
+.policy-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; padding: 24px; }
+.policy-modal.active { opacity: 1; pointer-events: auto; }
+.policy-modal__content { background: var(--bg-card); width: 100%; max-width: 600px; max-height: 80vh; border-radius: 12px; border: 1px solid var(--line); position: relative; display: flex; flex-direction: column; text-align: left; }
+.policy-modal__close { position: absolute; top: 16px; right: 16px; background: none; border: none; color: var(--hint); font-size: 28px; cursor: pointer; line-height: 1; }
+.policy-modal__content h2 { padding: 24px 24px 16px; margin: 0; font-size: 20px; border-bottom: 1px solid var(--line); color: var(--gold); }
+.policy-modal__body { padding: 24px; overflow-y: auto; color: var(--soft); font-size: 14px; line-height: 1.6; }
+.policy-modal__body h3 { color: var(--ink); margin-top: 20px; margin-bottom: 8px; font-size: 16px; }
+.policy-modal__body p { margin-bottom: 16px; }
+.policy-modal__body ul { margin-left: 20px; margin-bottom: 16px; }
 </style>
 <!-- Meta Pixel Code -->
 <script>
@@ -1351,7 +1361,7 @@ src="https://www.facebook.com/tr?id=1424234839427455&ev=PageView&noscript=1"
 <footer class="footer">
   <div class="footer__brand">NETWHEELS</div>
   <div data-i18n="footer_line1">Contenido educativo para adultos (+18) · Hecho en Ecuador</div>
-  <div data-i18n-html="footer_line2">© 2026 Netwheels · <a href="#refund-policy" onclick="openRefundModal(event)">Política de reembolso</a> · <a href="#terms-of-service" onclick="openTermsModal(event)">Términos</a></div>
+  <div data-i18n-html="footer_line2">© 2026 Netwheels · <a href="javascript:void(0)" onclick="openPolicyModal('refund')">Política de reembolso</a> · <a href="javascript:void(0)" onclick="openPolicyModal('terms')">Términos y condiciones</a> · <a href="javascript:void(0)" onclick="openPolicyModal('privacy')">Política de privacidad</a></div>
   <div style="margin-top:14px;max-width:600px;margin-left:auto;margin-right:auto" data-i18n="footer_disclaimer">Estas guías no reemplazan el acompañamiento de un/una profesional de la salud o terapia de pareja.</div>
 </footer>
 
@@ -1469,7 +1479,7 @@ const TEXTS = {
     final_cta_sub: "12 años de Netwheels acompañando relaciones reales. Lo que viene adentro de este pack es lo que no cabe en un solo video o post. Acceso inmediato. Sin suscripción. Tuyo para siempre.",
     final_cta_btn: "QUIERO EL MAPA",
     footer_line1: "Contenido educativo para adultos (+18) · Hecho en Ecuador",
-    footer_line2: '© 2026 Netwheels · <a href="#refund-policy" onclick="openRefundModal(event)">Política de reembolso</a> · <a href="#terms-of-service" onclick="openTermsModal(event)">Términos</a>',
+    footer_line2: '© 2026 Netwheels · <a href="javascript:void(0)" onclick="openPolicyModal(\'refund\')">Política de reembolso</a> · <a href="javascript:void(0)" onclick="openPolicyModal(\'terms\')">Términos y condiciones</a> · <a href="javascript:void(0)" onclick="openPolicyModal(\'privacy\')">Política de privacidad</a>',
     footer_disclaimer: "Estas guías no reemplazan el acompañamiento de un/una profesional de la salud o terapia de pareja.",
     sticky_price_note: "Pack 3 libros · acceso de por vida",
     sticky_cta: "QUIERO EL MAPA »"
@@ -1548,7 +1558,7 @@ const TEXTS = {
     final_cta_sub: "12 years of Netwheels accompanying real relationships. What's inside this pack is what doesn't fit in a single video or post. Instant access. No subscription. Yours forever.",
     final_cta_btn: "I WANT THE MAP",
     footer_line1: "Educational content for adults (18+) · Made in Ecuador",
-    footer_line2: '© 2026 Netwheels · <a href="#refund-policy" onclick="openRefundModal(event)">Refund policy</a> · <a href="#terms-of-service" onclick="openTermsModal(event)">Terms</a>',
+    footer_line2: '© 2026 Netwheels · <a href="javascript:void(0)" onclick="openPolicyModal(\'refund\')">Refund policy</a> · <a href="javascript:void(0)" onclick="openPolicyModal(\'terms\')">Terms and conditions</a> · <a href="javascript:void(0)" onclick="openPolicyModal(\'privacy\')">Privacy policy</a>',
     footer_disclaimer: "These guides do not replace the support of a healthcare professional or couples therapist.",
     sticky_price_note: "3-book pack · lifetime access",
     sticky_cta: "I WANT THE MAP »"
@@ -1627,7 +1637,7 @@ const TEXTS = {
     final_cta_sub: "12 anos de Netwheels acompanhando relacionamentos reais. O que vem dentro deste pacote é o que não cabe em um único vídeo ou post. Acesso imediato. Sem assinatura. Seu para sempre.",
     final_cta_btn: "QUERO O MAPA",
     footer_line1: "Conteúdo educativo para adultos (+18) · Feito no Equador",
-    footer_line2: '© 2026 Netwheels · <a href="#refund-policy" onclick="openRefundModal(event)">Política de reembolso</a> · <a href="#terms-of-service" onclick="openTermsModal(event)">Termos</a>',
+    footer_line2: '© 2026 Netwheels · <a href="javascript:void(0)" onclick="openPolicyModal(\'refund\')">Política de reembolso</a> · <a href="javascript:void(0)" onclick="openPolicyModal(\'terms\')">Termos e condições</a> · <a href="javascript:void(0)" onclick="openPolicyModal(\'privacy\')">Política de privacidade</a>',
     footer_disclaimer: "Estes guias não substituem o acompanhamento de um/uma profissional da saúde ou terapia de casal.",
     sticky_price_note: "Pacote 3 livros · acesso vitalício",
     sticky_cta: "QUERO O MAPA »"
@@ -1749,173 +1759,10 @@ function dismissStickyCta() {
   sessionStorage.setItem('nw_pack_sticky_dismissed', '1');
 }
 
-// ── REFUND & TERMS POPUP MODAL JS CONTROLLERS ──
-const REFUND_POLICIES_HTML = {
-  es: `
-    <h3>Productos digitales</h3>
-    <p>Netwheels vende exclusivamente productos digitales (PDF y HTML interactivo) con entrega inmediata por correo electrónico. Por la naturaleza del producto, una vez accedido y descargado el contenido, no puede ser <em>devuelto</em> en sentido físico.</p>
+// Use policies.js instead
+window.openRefundModal = function(e){ if(e) e.preventDefault(); openPolicyModal('refund'); }
+window.openTermsModal = function(e){ if(e) e.preventDefault(); openPolicyModal('terms'); }
 
-    <h3>Garantía de satisfacción de 7 días</h3>
-    <p>Si después de leer tu libro sientes que no es para ti, escríbenos en los primeros <strong>7 días naturales desde la compra</strong> y procesaremos el reembolso del 100% del valor pagado, sin preguntas raras. Nos basta con que nos cuentes brevemente qué esperabas y no encontraste — esa información nos ayuda a mejorar.</p>
-
-    <h3>Cómo solicitar un reembolso</h3>
-    <ol>
-      <li>Escríbenos por WhatsApp al <a href="https://wa.me/593968473255?text=Hola%20Netwheels%2C%20vengo%20de%20la%20landing" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline;"><strong>+593 96 847 3255</strong></a> o por correo a <a href="mailto:edwardsmurillo@hotmail.com" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline;"><strong>edwardsmurillo@hotmail.com</strong></a>.</li>
-      <li>Incluye el correo con el que compraste y el nombre del libro.</li>
-      <li>El reembolso se procesa al método de pago original en un plazo de 5 a 10 días hábiles, según tu banco o pasarela de pago.</li>
-    </ol>
-
-    <h3>Casos no cubiertos</h3>
-    <ul>
-      <li>Solicitudes después de 7 días desde la fecha de compra.</li>
-      <li>Disputas o reembolsos solicitados directamente al banco sin habernos contactado primero.</li>
-      <li>Reclamaciones por descontento con el tono o enfoque del contenido cuando el cliente ya consumió más del 80% del material.</li>
-    </ul>
-
-    <h3>Contacto</h3>
-    <p>Para cualquier duda sobre esta política, escríbenos por WhatsApp <a href="https://wa.me/593968473255?text=Hola%20Netwheels%2C%20vengo%20de%20la%20landing" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline;">+593 96 847 3255</a> o a <a href="mailto:edwardsmurillo@hotmail.com" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline;">edwardsmurillo@hotmail.com</a>. Te respondemos en horario hábil GMT-5 (Ecuador).</p>
-
-    <p><em>Esta política se rige por las leyes de la República del Ecuador y respeta la Ley Orgánica de Defensa del Consumidor.</em></p>
-  `,
-  en: `
-    <h3>Digital Products</h3>
-    <p>Netwheels exclusively sells digital products (PDF and interactive HTML) with immediate delivery via email. Due to the digital nature of the products, once the content is accessed and downloaded, it cannot be physically <em>returned</em>.</p>
-
-    <h3>7-Day Satisfaction Guarantee</h3>
-    <p>If after reading your book you feel it is not for you, contact us within the first <strong>7 calendar days of purchase</strong> and we will process a 100% refund of the amount paid, no weird questions asked. We only ask that you briefly tell us what you were expecting and didn't find — this feedback helps us improve.</p>
-
-    <h3>How to Request a Refund</h3>
-    <ol>
-      <li>Write to us on WhatsApp at <a href="https://wa.me/593968473255?text=Hi%20Netwheels%2C%20I%27m%20coming%20from%20the%20landing%20page" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline;"><strong>+593 96 847 3255</strong></a> or via email at <a href="mailto:edwardsmurillo@hotmail.com" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline;"><strong>edwardsmurillo@hotmail.com</strong></a>.</li>
-      <li>Include the email address used for the purchase and the title of the book.</li>
-      <li>The refund will be processed to the original payment method within 5 to 10 business days, depending on your bank or payment gateway.</li>
-    </ol>
-
-    <h3>Cases Not Covered</h3>
-    <ul>
-      <li>Requests made after 7 days from the purchase date.</li>
-      <li>Disputes or refunds requested directly to the bank without contacting us first.</li>
-      <li>Claims regarding dissatisfaction with the tone or focus of the content when the customer has already consumed more than 80% of the material.</li>
-    </ul>
-
-    <h3>Contact Us</h3>
-    <p>For any questions regarding this policy, write to us on WhatsApp at <a href="https://wa.me/593968473255" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline;">+593 96 847 3255</a> or via email at <a href="mailto:edwardsmurillo@hotmail.com" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline;">edwardsmurillo@hotmail.com</a>. We will respond during business hours GMT-5 (Ecuador).</p>
-
-    <p><em>This policy is governed by the laws of the Republic of Ecuador and respects the Consumer Protection Organic Law.</em></p>
-  `,
-  pt: `
-    <h3>Produtos digitais</h3>
-    <p>A Netwheels vende exclusivamente produtos digitais (PDF e HTML interativo) com entrega imediata via e-mail. Pela própria natureza do produto, uma vez acessado e baixado o conteúdo, ele não pode ser <em>devolvido</em> em sentido físico.</p>
-
-    <h3>Garantia de satisfação de 7 dias</h3>
-    <p>Se depois de ler seu livro você sentir que ele não é para você, escreva para nós nos primeiros <strong>7 dias corridos a partir da compra</strong> e processaremos o reembolso de 100% do valor pago, sem perguntas estranhas. Só pedimos que nos conte brevemente o que você esperava e não encontrou — essa informação nos ajuda a melhorar.</p>
-
-    <h3>Como solicitar um reembolso</h3>
-    <ol>
-      <li>Escreva para nós pelo WhatsApp no <a href="https://wa.me/593968473255?text=Oi%20Netwheels%2C%20vim%20da%20landing" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline;"><strong>+593 96 847 3255</strong></a> ou por e-mail em <a href="mailto:edwardsmurillo@hotmail.com" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline;"><strong>edwardsmurillo@hotmail.com</strong></a>.</li>
-      <li>Inclua o e-mail com o qual realizou a compra e o título do livro.</li>
-      <li>O reembolso será processado no método de pagamento original em um prazo de 5 a 10 dias úteis, dependendo do seu banco ou intermediador de pagamento.</li>
-    </ol>
-
-    <h3>Casos não cobertos</h3>
-    <ul>
-      <li>Solicitações feitas após 7 dias da data de compra.</li>
-      <li>Disputas ou reembolsos solicitados diretamente ao banco sem antes entrar em contato conosco.</li>
-      <li>Reclamações por insatisfação com o tom ou abordagem do conteúdo caso o cliente já tenha consumido mais de 80% do material.</li>
-    </ul>
-
-    <h3>Contato</h3>
-    <p>Para qualquer dúvida sobre esta política, escreva para nós pelo WhatsApp <a href="https://wa.me/593968473255?text=Oi%20Netwheels%2C%20vim%20da%20landing" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline;">+593 96 847 3255</a> ou por e-mail em <a href="mailto:edwardsmurillo@hotmail.com" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline;">edwardsmurillo@hotmail.com</a>. Respondemos em horário comercial GMT-5 (Equador).</p>
-
-    <p><em>Esta política é regida pelas leis da República do Equador e respeita a Lei Orgânica de Defesa do Consumidor.</em></p>
-  `
-};
-
-const TERMS_POLICIES_HTML = {
-  es: `
-    <h3>1. Propiedad Intelectual</h3>
-    <p>Todo el contenido de los libros digitales, textos, imágenes, logotipos y diseños son propiedad exclusiva de Netwheels. Queda prohibida la reproducción, distribución, venta o modificación sin autorización previa por escrito.</p>
-
-    <h3>2. Uso del Contenido</h3>
-    <p>El material proporcionado tiene únicamente fines informativos y educativos. No constituye ni sustituye el asesoramiento psicológico, médico o terapia de pareja profesional. El uso de la información es bajo responsabilidad del lector.</p>
-
-    <h3>3. Descarga y Entrega</h3>
-    <p>Al procesar la compra, recibirás un enlace de descarga inmediata por correo electrónico. Eres responsable de proporcionar un correo válido y de descargar el material en tu dispositivo.</p>
-
-    <h3>4. Limitación de Responsabilidad</h3>
-    <p>Netwheels no se hace responsable de daños indirectos, pérdidas o malentendidos derivados del uso o interpretación del contenido de los libros digitales.</p>
-
-    <h3>5. Modificaciones de los Términos</h3>
-    <p>Nos reservamos el derecho de modificar estos términos en cualquier momento. Las modificaciones entrarán en vigor inmediatamente después de su publicación en el sitio web.</p>
-  `,
-  en: `
-    <h3>1. Intellectual Property</h3>
-    <p>All content in the digital books, texts, images, logos, and designs is the exclusive property of Netwheels. Any reproduction, distribution, sale, or modification without prior written authorization is strictly prohibited.</p>
-
-    <h3>2. Use of Content</h3>
-    <p>The material provided is for informational and educational purposes only. It does not constitute or replace professional psychological, medical advice, or couples therapy. The use of this information is at the reader's own risk.</p>
-
-    <h3>3. Download and Delivery</h3>
-    <p>Upon purchase, you will receive an immediate download link via email. You are responsible for providing a valid email address and downloading the material onto your device.</p>
-
-    <h3>4. Limitation of Liability</h3>
-    <p>Netwheels is not liable for any indirect damages, losses, or misunderstandings resulting from the use or interpretation of the content in the digital books.</p>
-
-    <h3>5. Changes to Terms</h3>
-    <p>We reserve the right to modify these terms at any time. Any changes will take effect immediately upon being posted on the website.</p>
-  `,
-  pt: `
-    <h3>1. Propriedade Intelectual</h3>
-    <p>Todo o conteúdo dos livros digitais, textos, imagens, logotipos e designs é propriedade exclusiva da Netwheels. Fica proibida a reprodução, distribuição, venda ou modificação sem autorização prévia por escrito.</p>
-
-    <h3>2. Uso do Conteúdo</h3>
-    <p>O material fornecido tem fins exclusivamente informativos e educativos. Não constitui nem substitui o aconselhamento psicológico, médico ou terapia de casal profissional. O uso da informação é de inteira responsabilidade do leitor.</p>
-
-    <h3>3. Download e Entrega</h3>
-    <p>Ao processar a compra, você receberá um link de download imediato por e-mail. Você é responsável por fornecer um e-mail válido e baixar o material em seu dispositivo.</p>
-
-    <h3>4. Limitação de Responsabilidade</h3>
-    <p>A Netwheels não se responsabiliza por danos indiretos, perdas ou mal-entendidos derivados do uso ou interpretação do conteúdo dos livros digitais.</p>
-
-    <h3>5. Alterações dos Termos</h3>
-    <p>Reservamo-nos o direito de alterar estes termos a qualquer momento. As alterações entrarão em vigor imediatamente após a sua publicação no site.</p>
-  `
-};
-
-const POLICY_TITLES = {
-  es: { refund: "Política de reembolso", terms: "Términos del servicio" },
-  en: { refund: "Refund policy", terms: "Terms of service" },
-  pt: { refund: "Política de reembolso", terms: "Termos de serviço" }
-};
-
-function openRefundModal(event) {
-  if (event) event.preventDefault();
-  const bodyEl = document.getElementById('policyPopupBody');
-  const titleEl = document.getElementById('policyPopupTitle');
-  const iconEl = document.getElementById('policyPopupIcon');
-  if (bodyEl) bodyEl.innerHTML = REFUND_POLICIES_HTML[LANG] || REFUND_POLICIES_HTML[DEFAULT_LANG];
-  if (titleEl) titleEl.textContent = (POLICY_TITLES[LANG] || POLICY_TITLES[DEFAULT_LANG]).refund;
-  if (iconEl) iconEl.textContent = "🛡️";
-  document.getElementById('policyPopup').classList.add('open');
-  document.getElementById('policyPopupBg').classList.add('open');
-}
-
-function openTermsModal(event) {
-  if (event) event.preventDefault();
-  const bodyEl = document.getElementById('policyPopupBody');
-  const titleEl = document.getElementById('policyPopupTitle');
-  const iconEl = document.getElementById('policyPopupIcon');
-  if (bodyEl) bodyEl.innerHTML = TERMS_POLICIES_HTML[LANG] || TERMS_POLICIES_HTML[DEFAULT_LANG];
-  if (titleEl) titleEl.textContent = (POLICY_TITLES[LANG] || POLICY_TITLES[DEFAULT_LANG]).terms;
-  if (iconEl) iconEl.textContent = "📝";
-  document.getElementById('policyPopup').classList.add('open');
-  document.getElementById('policyPopupBg').classList.add('open');
-}
-
-function closePolicyPopup() {
-  document.getElementById('policyPopup').classList.remove('open');
-  document.getElementById('policyPopupBg').classList.remove('open');
-}
 
 // ── Tracking hook (GA4 + Meta Pixel placeholders) ──
 document.addEventListener("click", function(e) {
@@ -1941,15 +1788,14 @@ setupReveal();
 -->
 
 <!-- POLICY POPUP MODAL -->
-<div class="policy-popup-bg" id="policyPopupBg" onclick="closePolicyPopup()"></div>
-<div class="policy-popup" id="policyPopup" role="dialog" aria-labelledby="policyPopupTitle">
-  <div class="policy-popup__header">
-    <button class="policy-popup__close" onclick="closePolicyPopup()" aria-label="Cerrar">×</button>
-    <div class="policy-popup__icon" id="policyPopupIcon">🛡️</div>
-    <h3 class="policy-popup__title" id="policyPopupTitle">Política</h3>
+<div class="policy-modal" id="policyModal">
+  <div class="policy-modal__content">
+    <button class="policy-modal__close" onclick="closePolicyModal()">×</button>
+    <h2 id="policyTitle">Title</h2>
+    <div class="policy-modal__body" id="policyBody"></div>
   </div>
-  <div class="policy-popup__body" id="policyPopupBody"></div>
 </div>
+<script src="assets/policies.js"></script>
 
 </body>
 </html>

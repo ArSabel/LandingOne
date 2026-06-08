@@ -6,8 +6,26 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    
+    // Set default consent
+    if (!localStorage.getItem('nw_cookie_consent')) {
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'analytics_storage': 'denied'
+      });
+    } else if (localStorage.getItem('nw_cookie_consent') === 'declined') {
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'analytics_storage': 'denied'
+      });
+    } else {
+      gtag('consent', 'default', {
+        'ad_storage': 'granted',
+        'analytics_storage': 'granted'
+      });
+    }
 
+    gtag('js', new Date());
     gtag('config', 'G-LLHXHM4PMR');
   </script>
   <meta charset="UTF-8">
@@ -981,6 +999,112 @@ button { font-family: inherit; cursor: pointer; }
 .policy-modal__body h3 { color: var(--ink); margin-top: 20px; margin-bottom: 8px; font-size: 16px; }
 .policy-modal__body p { margin-bottom: 16px; }
 .policy-modal__body ul { margin-left: 20px; margin-bottom: 16px; }
+
+/* ── COOKIE CONSENT BANNER ── */
+.cookie-banner {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(21, 21, 29, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid var(--line);
+  box-shadow: 0 -10px 32px rgba(0,0,0,0.5);
+  z-index: 200;
+  padding: 16px 24px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(100%);
+  transition: opacity 0.3s ease, transform 0.4s cubic-bezier(.2,.9,.3,1.1);
+}
+.cookie-banner.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.cookie-banner__inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.cookie-banner__text {
+  font-size: 13px;
+  color: var(--soft);
+  line-height: 1.5;
+}
+.cookie-banner__text a {
+  color: var(--gold-soft);
+  text-decoration: underline;
+  font-weight: 600;
+}
+.cookie-banner__text a:hover {
+  color: var(--gold);
+}
+.cookie-banner__buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.cookie-banner__btn {
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+.cookie-banner__btn--decline {
+  background: rgba(245, 240, 232, 0.08);
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+.cookie-banner__btn--decline:hover {
+  background: rgba(245, 240, 232, 0.15);
+  border-color: var(--soft);
+}
+.cookie-banner__btn--accept {
+  background: var(--accent-soft);
+  color: white;
+  box-shadow: 0 4px 12px rgba(184, 85, 64, 0.25);
+}
+.cookie-banner__btn--accept:hover {
+  background: var(--accent);
+  transform: translateY(-1px);
+}
+.cookie-banner__btn:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .cookie-banner {
+    padding: 16px 18px 20px;
+  }
+  .cookie-banner__inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+  .cookie-banner__text {
+    font-size: 12px;
+    text-align: left;
+  }
+  .cookie-banner__buttons {
+    width: 100%;
+  }
+  .cookie-banner__btn {
+    flex: 1;
+    text-align: center;
+    padding: 12px 14px;
+    font-size: 12px;
+  }
+}
 </style>
 <!-- Meta Pixel Code -->
 <script>
@@ -1491,7 +1615,10 @@ const TEXTS = {
     footer_line2: '© 2026 Netwheels · <a href="javascript:void(0)" onclick="openPolicyModal(\'refund\')">Política de reembolso</a> · <a href="javascript:void(0)" onclick="openPolicyModal(\'terms\')">Términos y condiciones</a> · <a href="javascript:void(0)" onclick="openPolicyModal(\'privacy\')">Política de privacidad</a>',
     footer_disclaimer: "Estas guías no reemplazan el acompañamiento de un/una profesional de la salud o terapia de pareja.",
     sticky_price_note: "Pack 3 libros · acceso de por vida",
-    sticky_cta: "QUIERO EL MAPA »"
+    sticky_cta: "QUIERO EL MAPA »",
+    cookie_text: 'Utilizamos cookies y tecnologías similares (como el Píxel de Meta) para mejorar tu experiencia, analizar el tráfico y mostrar anuncios personalizados. Al hacer clic en "Aceptar", aceptas el uso de todas estas tecnologías. <a href="javascript:void(0)" onclick="openPolicyModal(\'privacy\')">Leer Política de Privacidad</a>',
+    cookie_accept: "Aceptar",
+    cookie_decline: "Rechazar"
   },
   en: {
     hdr_product_subtitle: "SHE DOESN'T TRADE FOR ANYONE",
@@ -1570,7 +1697,10 @@ const TEXTS = {
     footer_line2: '© 2026 Netwheels · <a href="javascript:void(0)" onclick="openPolicyModal(\'refund\')">Refund policy</a> · <a href="javascript:void(0)" onclick="openPolicyModal(\'terms\')">Terms and conditions</a> · <a href="javascript:void(0)" onclick="openPolicyModal(\'privacy\')">Privacy policy</a>',
     footer_disclaimer: "These guides do not replace the support of a healthcare professional or couples therapist.",
     sticky_price_note: "3-book pack · lifetime access",
-    sticky_cta: "I WANT THE MAP »"
+    sticky_cta: "I WANT THE MAP »",
+    cookie_text: 'We use cookies and similar technologies (like the Meta Pixel) to improve your experience, analyze traffic, and display personalized ads. By clicking "Accept", you agree to the use of all these technologies. <a href="javascript:void(0)" onclick="openPolicyModal(\'privacy\')">Read Privacy Policy</a>',
+    cookie_accept: "Accept",
+    cookie_decline: "Decline"
   },
   pt: {
     hdr_product_subtitle: "QUE ELA NÃO TROCA POR NINGUÉM",
@@ -1649,7 +1779,10 @@ const TEXTS = {
     footer_line2: '© 2026 Netwheels · <a href="javascript:void(0)" onclick="openPolicyModal(\'refund\')">Política de reembolso</a> · <a href="javascript:void(0)" onclick="openPolicyModal(\'terms\')">Termos e condições</a> · <a href="javascript:void(0)" onclick="openPolicyModal(\'privacy\')">Política de privacidade</a>',
     footer_disclaimer: "Estes guias não substituem o acompanhamento de um/uma profissional da saúde ou terapia de casal.",
     sticky_price_note: "Pacote 3 livros · acesso vitalício",
-    sticky_cta: "QUERO O MAPA »"
+    sticky_cta: "QUERO O MAPA »",
+    cookie_text: 'Utilizamos cookies e tecnologias semelhantes (como o Meta Pixel) para melhorar sua experiência, analisar o tráfico e exibir anúncios personalizados. Ao clicar em "Aceitar", você concorda com o uso de todas essas tecnologias. <a href="javascript:void(0)" onclick="openPolicyModal(\'privacy\')">Ler Política de Privacidade</a>',
+    cookie_accept: "Aceitar",
+    cookie_decline: "Recusar"
   }
 };
 
@@ -1782,9 +1915,38 @@ document.addEventListener("click", function(e) {
   try { if (window.fbq)  window.fbq("trackCustom", event); } catch(err){}
 });
 
+function acceptCookies() {
+  localStorage.setItem('nw_cookie_consent', 'accepted');
+  const banner = document.getElementById('cookieBanner');
+  if (banner) banner.classList.remove('show');
+  if (window.gtag) {
+    gtag('consent', 'update', {
+      'ad_storage': 'granted',
+      'analytics_storage': 'granted'
+    });
+  }
+}
+
+function declineCookies() {
+  localStorage.setItem('nw_cookie_consent', 'declined');
+  const banner = document.getElementById('cookieBanner');
+  if (banner) banner.classList.remove('show');
+}
+
+function checkCookieConsent() {
+  const consent = localStorage.getItem('nw_cookie_consent');
+  if (!consent) {
+    setTimeout(() => {
+      const banner = document.getElementById('cookieBanner');
+      if (banner) banner.classList.add('show');
+    }, 1000);
+  }
+}
+
 // ── INIT ──
 applyLanguage();
 setupReveal();
+checkCookieConsent();
 </script>
 
 <!--
@@ -1795,6 +1957,19 @@ setupReveal();
   META PIXEL (descomenta y reemplaza ID real):
   <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','XXXXXXXXXXXXXXX');fbq('track','PageView');</script>
 -->
+
+<!-- Cookie Consent Banner -->
+<div class="cookie-banner" id="cookieBanner">
+  <div class="cookie-banner__inner">
+    <p class="cookie-banner__text" data-i18n-html="cookie_text">
+      <!-- Translated content loaded via i18n -->
+    </p>
+    <div class="cookie-banner__buttons">
+      <button class="cookie-banner__btn cookie-banner__btn--decline" onclick="declineCookies()" data-i18n="cookie_decline">Rechazar</button>
+      <button class="cookie-banner__btn cookie-banner__btn--accept" onclick="acceptCookies()" data-i18n="cookie_accept">Aceptar</button>
+    </div>
+  </div>
+</div>
 
 <!-- POLICY POPUP MODAL -->
 <div class="policy-modal" id="policyModal">
